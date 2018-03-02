@@ -110,9 +110,8 @@ Animales CrearAnimal()
          << "1- Zona Ártica" << endl
          << "2- Zona Desértica" << endl
          << "3- Zona de Jungla Tropical" << endl
-         << "4- Zona Sabana";
+         << "4- Zona Sabana" << endl;
     cin >> tipo;
-    cout << endl;
     while (tipo > 4 || tipo < 1)
     {
         cout << endl
@@ -120,15 +119,91 @@ Animales CrearAnimal()
         endl << "1- Zona Ártica" << endl
              << "2- Zona Desértica" << endl
              << "3- Zona de Jungla Tropical" << endl
-             << "4- Zona Sabana";
+             << "4- Zona Sabana" << endl;
         cin >> tipo;
-        cout << endl;
     }
-    
+    cout << "Patas" << endl;
+    int cant_patas;
+    int largo_patas;
+    string tipo_patas;
+    cout << "     Ingrese Cantidad de Patas: ";
+    cin >> cant_patas;
+    cout << endl
+         << "     Ingrese Largo de Patas: ";
+    cin >> largo_patas;
+    count << endl
+          << "    Ingrese Tipo de Patas (Ejemplo: Pezuñas, Garras,...): " cin >>
+        tipo_patas;
+    patas = new Patas(cant_patas, largo_patas, tipo_patas);
+    cout << endl
+         << "Pelaje" << endl;
+    string color_pelaje;
+    int grosor_pelaje;
+    int largo_pelaje;
+    cout << "     Ingrese Color de Pelaje: ";
+    cin >> color_pelaje;
+    cout << endl
+         << "     Ingrese Grosor de Pelaje (Ejemplo: 19, 5, ...): ";
+    cin >> grosor_pelaje;
+    cout << "     Ingrese el Largo de Pelaje";
+    cin >> largo_pelaje;
+    pelaje = new Pelaje(color_pelaje, grosor_pelaje, largo_pelaje);
+    cout << endl;
+    string color_ojos;
+    bool vision_nocturna;
+    cout << "Ojos" << endl;
+    cout << "     Ingrese Color de Ojos";
+    cin >> color_ojos;
+    int vn;
+    cout << endl
+         << "       Tiene Vision Nocturna? [1-Si, 0- No]: ";
+    cin >> vn;
+    if (cin == 1)
+    {
+        vision_nocturna == true;
+    }
+    else
+    {
+        vision_nocturna == false;
+    }
+    ojos = new Ojos(color_ojos, vision_nocturna);
+    cout << endl
+         << "Orejas" << endl;
+    int tamanio_orejas;
+    int capacidad_audicion;
+    cout << "     Ingrese el Tamaño de las Orejas: ";
+    con >> tamanio_orejas;
+    cout << endl;
+    cout << "     Ingrese Capacidad de Audicion (Ejemplo: 50, 45, 100,...): ";
+    cin >> capacidad_audicion;
+    cout << endl;
+    orejas = new Orejas(tamanio_orejas, capacidad_audicion);
+    cout << "Cola:" << endl;
+    int largo_cola;
+    bool peluda;
+    cout << "     Ingrese el largo de la Cola: ";
+    cin >> largo_cola;
+    int pl;
+    cout << endl
+         << "       Es Peluda la Cola [1-Si, 0-No]";
+    cin >> pl;
+    if (pl == 1)
+    {
+        peluda = true;
+    }
+    else
+    {
+        peluda = false;
+    }
+    cola = new Cola();
+
+    Animales *animal = new Animales(especie, nombre, tamanio, tipo, patas, pelaje, ojos, orejas, cola);
+    return animal;
 }
 
-void EliminarAnimal()
+void EliminarAnimal(largo_cola, peluda);
 {
+    
 }
 
 void ListarAnimales(vector *<Animales>)
