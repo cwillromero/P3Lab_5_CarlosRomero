@@ -6,17 +6,12 @@
 
 using namespace std;
 
-//Cosntructor 1
-Zoologico::Zoologico(vector<Animales *> zonaArtica,vector<Animales *> zonaDesertica,vector<Animales *> junglaTropical,vector<Animales *> sabana){
-    this->zonaArtica=zonaArtica;
-    this->zonaDesertica=zonaDesertica;
-    this->junglaTropical=junglaTropical;
-    this->sabana=sabana;
-}//Fin constructor
-
 //Constructor2
 Zoologico::Zoologico(){
-
+	vector<Animales *> zonaArtica;
+        vector<Animales *> zonaDesertica;
+        vector<Animales *> junglaTropical;
+        vector<Animales *> sabana;
 }//Fin constructor sencillo
 
 vector<Animales *> Zoologico::getZonaArtica(){

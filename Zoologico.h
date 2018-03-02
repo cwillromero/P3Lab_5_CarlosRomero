@@ -26,7 +26,6 @@ class Zoologico{
         //prototipos de metodos
         //constructor
         Zoologico();
-        Zoologico(vector<Animales *>,vector<Animales *>,vector<Animales *>,vector<Animales *>);
 
         //metodos accersores / mutadores
         vector<Animales *> getZonaArtica();

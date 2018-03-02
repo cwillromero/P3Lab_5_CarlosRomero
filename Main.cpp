@@ -16,12 +16,15 @@ using namespace std;
 int menu();
 //Prototipos de metodods
 Animales *CrearAnimal();
-void EliminarAnimal(vector<Animales *>);
+vector<Animales *> EliminarAnimal(vector<Animales *>);
 void ListarAnimales(vector<Animales *>);
 void TrasladarAnimales(vector<Animales *>);
-
 int main()
 {
+    vector<Animales *> zonaArtica;
+    vector<Animales *> zonaDesertica;
+    vector<Animales *> junglaTropical;
+    vector<Animales *> sabana;
     //Zoologico Global que tendra todos los a imale.s
     Zoologico Zoo;
     //Lista de listaEspera de los animales al zoologico.
@@ -43,7 +46,26 @@ int main()
         { // Eliminar.
             if (listaEspera.size() != 0)
             {
-                EliminarAnimal(listaEspera);
+                for (int i = 0; i < listaEspera.size(); i++)
+                {
+                    if (listaEspera[i] != NULL)
+                    {
+                        cout << i << ") " << listaEspera[i]->toString() << endl;
+                    }
+                }
+                int pos;
+                cout << "Ingrese el Animal A Eliminar: ";
+                cin >> pos;
+                cout << endl;
+                while (pos < 0 || pos >= listaEspera.size())
+                {
+                    cout << "Esa Posicion no Existe!. Ingrese el Animal A Eliminar: ";
+                    cin >> pos;
+                    cout << endl;
+                }
+                delete listaEspera[pos];
+                listaEspera[pos] = NULL;
+                //listaEspera = EliminarAnimal(listaEspera);
             }
             else
             {
@@ -197,7 +219,7 @@ Animales *CrearAnimal()
     cin >> largo_cola;
     int pl;
     cout << endl
-         << "       Es Peluda la Cola [1-Si, 0-No]: ";
+         << "     Es Peluda la Cola [1-Si, 0-No]: ";
     cin >> pl;
     if (pl == 1)
     {
@@ -216,13 +238,13 @@ Animales *CrearAnimal()
     return animal;
 }
 
-void EliminarAnimal(vector<Animales *> listaEspera)
+vector<Animales *> EliminarAnimal(vector<Animales *> listaEspera)
 {
     for (int i = 0; i < listaEspera.size(); i++)
     {
-        if (listaEspera[i] != NULL)
+        if (listaEspera[i]->getNombre().size() != 0)
         {
-            cout <<i<<") "<< listaEspera[i]->toString() << endl;
+            cout << i << ") " << listaEspera[i]->toString() << endl;
         }
     }
     int pos;
@@ -237,6 +259,7 @@ void EliminarAnimal(vector<Animales *> listaEspera)
     }
     delete listaEspera[pos];
     listaEspera[pos] = NULL;
+    return listaEspera;
 }
 
 void ListarAnimales(vector<Animales *>)
