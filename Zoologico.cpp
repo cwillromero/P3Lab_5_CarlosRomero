@@ -7,55 +7,58 @@
 using namespace std;
 
 //Constructor2
-Zoologico::Zoologico(){
-	vector<Animales *> zonaArtica;
-        vector<Animales *> zonaDesertica;
-        vector<Animales *> junglaTropical;
-        vector<Animales *> sabana;
-}//Fin constructor sencillo
+Zoologico::Zoologico()
+{
+    vector<Animales *> zonaArtica;
+    vector<Animales *> zonaDesertica;
+    vector<Animales *> junglaTropical;
+    vector<Animales *> sabana;
+} //Fin constructor sencillo
 
-vector<Animales *> Zoologico::getZonaArtica(){
+vector<Animales *> Zoologico::getZonaArtica()
+{
     return zonaArtica;
 }
 
-void Zoologico:: setZonaArtica(vector<Animales *> zonaArtica){
-
-    this->zonaArtica=zonaArtica;
-
+void Zoologico::setZonaArtica(Animales *animal)
+{
+    zonaArtica.push_back(animal);
 }
 
-vector<Animales *> Zoologico::getZonaDesertica(){
+vector<Animales *> Zoologico::getZonaDesertica()
+{
     return zonaDesertica;
 }
 
-void Zoologico:: setZonaDesertica(vector<Animales *> zonaDesertica){
+void Zoologico::setZonaDesertica(Animales *animal)
+{
 
-    this->zonaDesertica=zonaDesertica;
-
+    zonaDesertica.push_back(animal);
 }
 
-vector<Animales *> Zoologico::getJunglaTropical(){
+vector<Animales *> Zoologico::getJunglaTropical()
+{
     return junglaTropical;
 }
 
-void Zoologico:: setJunglaTropical(vector<Animales *> junglaTropical){
+void Zoologico::setJunglaTropical(Animales *animal)
+{
 
-    this->junglaTropical=junglaTropical;
-
+    junglaTropical.push_back(animal);
 }
 
-vector<Animales *> Zoologico::getSabana(){
+vector<Animales *> Zoologico::getSabana()
+{
     return sabana;
 }
 
-void Zoologico:: setSabana(vector<Animales *> sabana){
-
-    this->sabana=sabana;
-
+void Zoologico::setSabana(Animales *animal)
+{
+    sabana.push_back(animal);
 }
 
-Zoologico::~Zoologico(){
+Zoologico::~Zoologico()
+{
 
-    cout<<"La instancia de Zoologico fue eliminada"<<endl;
-
+    cout << "La instancia de Zoologico fue eliminada" << endl;
 }

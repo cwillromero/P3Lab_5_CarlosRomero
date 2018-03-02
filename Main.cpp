@@ -17,16 +17,12 @@ int menu();
 //Prototipos de metodods
 Animales *CrearAnimal();
 vector<Animales *> EliminarAnimal(vector<Animales *>);
-void ListarAnimales(vector<Animales *>);
-void TrasladarAnimales(vector<Animales *>);
+void ListarAnimales(Zoologico *);
+Zoologico *TrasladarAnimales(vector<Animales *>, Zoologico *);
 int main()
 {
-    vector<Animales *> zonaArtica;
-    vector<Animales *> zonaDesertica;
-    vector<Animales *> junglaTropical;
-    vector<Animales *> sabana;
     //Zoologico Global que tendra todos los a imale.s
-    Zoologico Zoo;
+    Zoologico *Zool;
     //Lista de listaEspera de los animales al zoologico.
     vector<Animales *> listaEspera;
 
@@ -76,12 +72,13 @@ int main()
 
         case 3:
         { //Transferir
-
+            Zool = TrasladarAnimales(listaEspera, Zool);
             break;
         } //Fin del case 3
 
         case 4:
         { //Listar
+            ListarAnimales(Zool);
             break;
         } //Fin del case 4.
         case 5:
@@ -262,10 +259,67 @@ vector<Animales *> EliminarAnimal(vector<Animales *> listaEspera)
     return listaEspera;
 }
 
-void ListarAnimales(vector<Animales *>)
+void ListarAnimales(Zoologico *zoo)
 {
+    cout << "---ANIMALES---"<<endl;
+    cout << "Animales del Zona Artica" << endl;
+    for (int i = 0; i < zoo->getZonaArtica().size(); i++)
+    {
+        if(zoo->getZonaArtica()[i]!=NULL){
+            cout<<i<<") "<<zoo->getZonaArtica()[i]->toString()<<endl;
+        }
+    }
+    cout << "Animales del Zona Desertica" << endl;
+    for (int i = 0; i < zoo->getZonaDesertica().size(); i++)
+    {
+        if(zoo->getZonaDesertica()[i]!=NULL){
+            cout<<i<<") "<<zoo->getZonaDesertica()[i]->toString()<<endl;
+        }
+    }
+    cout << "Animales de Jungla Tropical" << endl;
+    for (int i = 0; i < zoo->getJunglaTropical().size(); i++)
+    {
+        if(zoo->getJunglaTropical()[i]!=NULL){
+            cout<<i<<") "<<zoo->getJunglaTropical()[i]->toString()<<endl;
+        }
+    }
+
+    cout << "Animales de Sabana " << endl;
+    for (int i = 0; i < zoo->getSabana().size(); i++)
+    {
+        if(zoo->getSabana()[i]!=NULL){
+            cout<<i<<") "<<zoo->getSabana()[i]->toString()<<endl;
+        }
+    }
+
 }
 
-void TrasladarAnimales(vector<Animales *>)
+Zoologico *TrasladarAnimales(vector<Animales *> listaEspera, Zoologico *zoo)
 {
+    zoo = new Zoologico();
+    for (int i = 0; i < listaEspera.size(); i++)
+    {
+        if (listaEspera[i] != NULL)
+        {
+            if (listaEspera[i]->getTipo() == 1)
+            {
+                zoo->setZonaArtica(listaEspera[i]);
+            }
+            else if (listaEspera[i]->getTipo() == 2)
+            {
+                zoo->setZonaDesertica(listaEspera[i]);
+            }
+            else if (listaEspera[i]->getTipo() == 3)
+            {
+                zoo->setJunglaTropical(listaEspera[i]);
+            }
+            else if (listaEspera[i]->getTipo() == 4)
+            {
+                zoo->setSabana(listaEspera[i]);
+            }
+        }
+    }
+    cout << "Animales Trasladados" << endl;
+    usleep(1000000);
+    return zoo;
 }

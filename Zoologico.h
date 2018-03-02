@@ -29,13 +29,13 @@ class Zoologico{
 
         //metodos accersores / mutadores
         vector<Animales *> getZonaArtica();
-        void setZonaArtica(vector<Animales *>);
+        void setZonaArtica(Animales *);
         vector<Animales *> getZonaDesertica();
-        void setZonaDesertica(vector<Animales *>);
+        void setZonaDesertica(Animales *);
         vector<Animales *> getJunglaTropical();
-        void setJunglaTropical(vector<Animales *>);
+        void setJunglaTropical(Animales *);
         vector<Animales *> getSabana();
-        void setSabana(vector<Animales *>);
+        void setSabana(Animales *);
 
     //Destructor
     ~Zoologico();
