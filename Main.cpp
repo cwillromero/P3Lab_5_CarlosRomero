@@ -220,9 +220,9 @@ void EliminarAnimal(vector<Animales *> listaEspera)
 {
     for (int i = 0; i < listaEspera.size(); i++)
     {
-        if (espera[i] != NULL)
+        if (listaEspera[i] != NULL)
         {
-            cout << i << ") " << *listaEspera[i] << endl;
+            cout <<i<<") "<< listaEspera[i]->toString() << endl;
         }
     }
     int pos;
@@ -231,13 +231,12 @@ void EliminarAnimal(vector<Animales *> listaEspera)
     cout << endl;
     while (pos < 0 || pos >= listaEspera.size())
     {
-
         cout << "Esa Posicion no Existe!. Ingrese el Animal A Eliminar: ";
         cin >> pos;
         cout << endl;
     }
-    delete listalistaEspera[i];
-    listaEspera[i] = NULL;
+    delete listaEspera[pos];
+    listaEspera[pos] = NULL;
 }
 
 void ListarAnimales(vector<Animales *>)
