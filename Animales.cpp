@@ -122,11 +122,11 @@ void Animales:: setCola(Cola* cola){
 
 Animales::~Animales(){
 
-    cout<<"La instancia de Animales fue eliminada";
+    cout<<"La instancia de Animales fue eliminada"<<endl;
 
 }
 
-string Animales:: Animales(){
+string Animales:: toString(){
     string retValue;
     stringstream str;
     str<<"Especie: "<<especie<<",  Nombre: "<<nombre<<", Tamaño: "<<tamanio<<"cm, Tipo: "<<tipo;

@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "Animales"
+#include "Animales.h"
 
 using namespace std;
 
@@ -26,17 +26,17 @@ class Zoologico{
         //prototipos de metodos
         //constructor
         Zoologico();
-        Zoologico(vector,vector,vector,vector);
+        Zoologico(vector<Animales *>,vector<Animales *>,vector<Animales *>,vector<Animales *>);
 
         //metodos accersores / mutadores
-        vector getZonaArtica();
-        void setZonaArtica(vector);
-        vector getZonaDesertica();
-        void setZonaDesertica(vector);
-        vecto getJunglaTropical();
-        void setJunglaTropical(vector);
-        vector getSabana();
-        void setSabana(vector);
+        vector<Animales *> getZonaArtica();
+        void setZonaArtica(vector<Animales *>);
+        vector<Animales *> getZonaDesertica();
+        void setZonaDesertica(vector<Animales *>);
+        vector<Animales *> getJunglaTropical();
+        void setJunglaTropical(vector<Animales *>);
+        vector<Animales *> getSabana();
+        void setSabana(vector<Animales *>);
 
     //Destructor
     ~Zoologico();

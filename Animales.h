@@ -50,11 +50,11 @@ class Animales{
         void setPatas(Patas*);
         Pelaje* getPelaje();
         void setPelaje(Pelaje*);
-        Ojos getOjos();
+        Ojos* getOjos();
         void setOjos(Ojos*);
-        Orejas getOrejas();
+        Orejas* getOrejas();
         void setOrejas(Orejas*);
-        Cola getCola();
+        Cola* getCola();
         void setCola(Cola*);
 	string toString();
 

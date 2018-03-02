@@ -1,9 +1,10 @@
 #include <iostream>
 using namespace std;
 #include <sstream>
+#include <unistd.h>
 #include <typeinfo>
 #include <vector>
-//#include "Zoologico.h"
+#include "Zoologico.h"
 #include "Animales.h"
 #include "Patas.h"
 #include "Pelaje.h"
@@ -14,32 +15,40 @@ using namespace std;
 //Menu principal del programa.
 int menu();
 //Prototipos de metodods
-Animales CrearAnimal();
-void EliminarAnimal();
-void ListarAnimales(vector *<Animales>);
-void TrasladarAnimales(vector *<Animales>);
+Animales *CrearAnimal();
+void EliminarAnimal(vector<Animales *>);
+void ListarAnimales(vector<Animales *>);
+void TrasladarAnimales(vector<Animales *>);
 
 int main()
 {
     //Zoologico Global que tendra todos los a imale.s
     Zoologico Zoo;
-    //Lista de espera de los animales al zoologico.
-    vector<Animales *> Espera;
+    //Lista de listaEspera de los animales al zoologico.
+    vector<Animales *> listaEspera;
 
-    bool Continuar = 1;
-    while (Continuar)
+    int opcion;
+    while (opcion != 5)
     {
         //Llamado del menu del programa.
-        switch (menu())
+        opcion = menu();
+        switch (opcion)
         {
         case 1:
         { // Agregar
-            Espera.push_back(CrearAnimal());
+            listaEspera.push_back(CrearAnimal());
             break;
         } //Fin del case 1.
         case 2:
         { // Eliminar.
-
+            if (listaEspera.size() != 0)
+            {
+                EliminarAnimal(listaEspera);
+            }
+            else
+            {
+                cout << "Debe crear animales Primero" << endl;
+            }
             break;
         } //Fin del case 2
 
@@ -53,10 +62,10 @@ int main()
         { //Listar
             break;
         } //Fin del case 4.
-        default:
+        case 5:
         { //SALIR
-            Continuar = 0;
             break;
+            exit(0);
         } //FIn del default
 
         } //Fin del switch.
@@ -68,8 +77,9 @@ int main()
 //Menu principal del programa
 int menu()
 {
-    int Respuesta = -100;
-    while (Respuesta <= 0 || Respuesta > 4)
+    int Respuesta = -1;
+    ;
+    while (Respuesta <= 0 || Respuesta > 5)
     {
         cout << endl
              << "-------Bienvenido al Zoologico ZIIE-------" << endl
@@ -85,7 +95,7 @@ int menu()
 } //Fin del metodo del Menu.
 
 //METODOS DEL PROGRAMA
-Animales CrearAnimal()
+Animales *CrearAnimal()
 {
     string especie;
     string nombre;
@@ -115,8 +125,8 @@ Animales CrearAnimal()
     while (tipo > 4 || tipo < 1)
     {
         cout << endl
-             << "Tipo Incorrecto!! Ingrese el Tipo (Ejemplo: 1, 2, 3 o 4): ";
-        endl << "1- Zona Ártica" << endl
+             << "Tipo Incorrecto!! Ingrese el Tipo (Ejemplo: 1, 2, 3 o 4): " << endl
+             << "1- Zona Ártica" << endl
              << "2- Zona Desértica" << endl
              << "3- Zona de Jungla Tropical" << endl
              << "4- Zona Sabana" << endl;
@@ -131,21 +141,23 @@ Animales CrearAnimal()
     cout << endl
          << "     Ingrese Largo de Patas: ";
     cin >> largo_patas;
-    count << endl
-          << "    Ingrese Tipo de Patas (Ejemplo: Pezuñas, Garras,...): " cin >>
-        tipo_patas;
+    cout << endl
+         << "     Ingrese Tipo de Patas (Ejemplo: Pezuñas, Garras,...): ";
+    cin >> tipo_patas;
     patas = new Patas(cant_patas, largo_patas, tipo_patas);
     cout << endl
          << "Pelaje" << endl;
     string color_pelaje;
     int grosor_pelaje;
     int largo_pelaje;
-    cout << "     Ingrese Color de Pelaje: ";
+    cout << endl
+         << "     Ingrese Color de Pelaje: ";
     cin >> color_pelaje;
     cout << endl
          << "     Ingrese Grosor de Pelaje (Ejemplo: 19, 5, ...): ";
     cin >> grosor_pelaje;
-    cout << "     Ingrese el Largo de Pelaje";
+    cout << endl
+         << "     Ingrese el Largo de Pelaje: ";
     cin >> largo_pelaje;
     pelaje = new Pelaje(color_pelaje, grosor_pelaje, largo_pelaje);
     cout << endl;
@@ -156,9 +168,9 @@ Animales CrearAnimal()
     cin >> color_ojos;
     int vn;
     cout << endl
-         << "       Tiene Vision Nocturna? [1-Si, 0- No]: ";
+         << "     Tiene Vision Nocturna? [1-Si, 0- No]: ";
     cin >> vn;
-    if (cin == 1)
+    if (vn == 1)
     {
         vision_nocturna == true;
     }
@@ -172,7 +184,7 @@ Animales CrearAnimal()
     int tamanio_orejas;
     int capacidad_audicion;
     cout << "     Ingrese el Tamaño de las Orejas: ";
-    con >> tamanio_orejas;
+    cin >> tamanio_orejas;
     cout << endl;
     cout << "     Ingrese Capacidad de Audicion (Ejemplo: 50, 45, 100,...): ";
     cin >> capacidad_audicion;
@@ -185,7 +197,7 @@ Animales CrearAnimal()
     cin >> largo_cola;
     int pl;
     cout << endl
-         << "       Es Peluda la Cola [1-Si, 0-No]";
+         << "       Es Peluda la Cola [1-Si, 0-No]: ";
     cin >> pl;
     if (pl == 1)
     {
@@ -195,55 +207,43 @@ Animales CrearAnimal()
     {
         peluda = false;
     }
-    cola = new Cola();
+    cola = new Cola(largo_cola, peluda);
 
     Animales *animal = new Animales(especie, nombre, tamanio, tipo, patas, pelaje, ojos, orejas, cola);
+    cout << "Animal Creado..." << endl;
+    usleep(1000000);
+    cout << animal->toString() << endl;
     return animal;
 }
 
-void EliminarAnimal(largo_cola, peluda);
+void EliminarAnimal(vector<Animales *> listaEspera)
 {
-    
-}
-
-void ListarAnimales(vector *<Animales>)
-{
-}
-void TrasladarAnimales(vector *<Animales>)
-{
-}
-/*
-    vector<Persona*> personas;
-
-    personas.push_back(new FireBender("pp","rasdsa", 9, "t", 8,6));
-    personas.push_back(new FireBender("pp","asda", 9, "t", 8,6));
-    personas.push_back(new Persona("c","rooko", 9, "t"));
-
-    for(int i = 0; i<personas.size(); i++){
-        cout<< personas[i]->getNombre() << endl;
-
-    }
-
-
-    for(int i = 0; i<personas.size(); i++){
-        if(typeid(*personas[i]) == typeid(FireBender)){
-            cout<< "sii "<< endl;
-        }
-        
-       // cout<< typeid(FireBender).name()<< endl;
-        //cout<< typeid(*personas[i]).name()<< endl;
-    }
-
-    delete personas[2];
-    personas[2] = NULL;
-
-    for(int i =0; i< personas.size(); i++){
-        if(personas[i] == NULL){
-            cout<< "vacio" << endl;
-        }else{
-            personas[i]->setNombre("ahora");
-            cout<< personas[i]->getNombre() << i<< endl;
+    for (int i = 0; i < listaEspera.size(); i++)
+    {
+        if (espera[i] != NULL)
+        {
+            cout << i << ") " << *listaEspera[i] << endl;
         }
     }
+    int pos;
+    cout << "Ingrese el Animal A Eliminar: ";
+    cin >> pos;
+    cout << endl;
+    while (pos < 0 || pos >= listaEspera.size())
+    {
 
-    */
+        cout << "Esa Posicion no Existe!. Ingrese el Animal A Eliminar: ";
+        cin >> pos;
+        cout << endl;
+    }
+    delete listalistaEspera[i];
+    listaEspera[i] = NULL;
+}
+
+void ListarAnimales(vector<Animales *>)
+{
+}
+
+void TrasladarAnimales(vector<Animales *>)
+{
+}
