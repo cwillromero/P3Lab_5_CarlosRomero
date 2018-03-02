@@ -1,9 +1,3 @@
-#include <iostream>
-using namespace std;
-#include <sstream>
-#include <unistd.h>
-#include <typeinfo>
-#include <vector>
 #include "Zoologico.h"
 #include "Animales.h"
 #include "Patas.h"
@@ -11,35 +5,47 @@ using namespace std;
 #include "Ojos.h"
 #include "Orejas.h"
 #include "Cola.h"
+#include <iostream>
+using namespace std;
+#include <sstream>
+#include <unistd.h>
+#include <typeinfo>
+#include <vector>
 
-//Menu principal del programa.
 int menu();
-//Prototipos de metodods
 Animales *CrearAnimal();
 vector<Animales *> EliminarAnimal(vector<Animales *>);
-void ListarAnimales(Zoologico *);
-Zoologico *TrasladarAnimales(vector<Animales *>, Zoologico *);
+void Listar(Zoologico *);
+Zoologico *Transferecia(string, int, int, vector<Animales *>, Zoologico *);
+void Ordenar(Zoologico *);
+
 int main()
 {
-    //Zoologico Global que tendra todos los a imale.s
-    Zoologico *Zool;
-    //Lista de listaEspera de los animales al zoologico.
+    cout<<"--------Laboratorio #5 - Carlos Romero----"<<endl;
+    string name;
+    cout<<"Ingrese el Nombre del Zoologico"<<endl;
+    cin>>name;
+    int tamanio;
+    cout<<"Ingrese el Tamaño del Zoologico"<<endl;
+    cin>>tamanio;
     vector<Animales *> listaEspera;
-
+    int personas;
+    cout<<"Ingrese la Capacidad de Personas del Zoologico"<<endl;
+    cin>>personas;
     int opcion;
+    Zoologico *Zool;
     while (opcion != 5)
     {
-        //Llamado del menu del programa.
         opcion = menu();
         switch (opcion)
         {
         case 1:
-        { // Agregar
+        {
             listaEspera.push_back(CrearAnimal());
             break;
-        } //Fin del case 1.
+        }
         case 2:
-        { // Eliminar.
+        {
             if (listaEspera.size() != 0)
             {
                 for (int i = 0; i < listaEspera.size(); i++)
@@ -68,52 +74,48 @@ int main()
                 cout << "Debe crear animales Primero" << endl;
             }
             break;
-        } //Fin del case 2
+        }
 
         case 3:
-        { //Transferir
-            Zool = TrasladarAnimales(listaEspera, Zool);
+        {
+            Zool = Transferecia(name, tamanio, personas, listaEspera, Zool);
             break;
-        } //Fin del case 3
+        }
 
         case 4:
-        { //Listar
-            ListarAnimales(Zool);
+        {
+            Listar(Zool);
             break;
-        } //Fin del case 4.
+        }
         case 5:
-        { //SALIR
+        {
             break;
             exit(0);
-        } //FIn del default
-
-        } //Fin del switch.
-    }     //FIn del while.
+        }
+        }
+    }
 
     return 0;
 }
 
-//Menu principal del programa
 int menu()
 {
-    int Respuesta = -1;
-    ;
-    while (Respuesta <= 0 || Respuesta > 5)
+    int r=6;
+    while (r > 5 || r <= 0)
     {
         cout << endl
-             << "-------Bienvenido al Zoologico ZIIE-------" << endl
+             << "-------Laboratorio #5 Carlos Romero-------" << endl
              << "Seleccione la opción que desea : " << endl;
-        cout << "1- Agregar Animal." << endl
+        cout << "1- Agregar un Animal." << endl
              << "2- Eliminar Animal." << endl
              << "3- Transferir al zoológico." << endl
              << "4- Listar Animales" << endl
              << "5- Salir" << endl;
-        cin >> Respuesta;
+        cin >> r;
     }
-    return Respuesta;
-} //Fin del metodo del Menu.
+    return r;
+}
 
-//METODOS DEL PROGRAMA
 Animales *CrearAnimal()
 {
     string especie;
@@ -259,44 +261,47 @@ vector<Animales *> EliminarAnimal(vector<Animales *> listaEspera)
     return listaEspera;
 }
 
-void ListarAnimales(Zoologico *zoo)
+void Listar(Zoologico *zoo)
 {
-    cout << "---ANIMALES---"<<endl;
+    cout << "---ANIMALES---" << endl;
     cout << "Animales del Zona Artica" << endl;
     for (int i = 0; i < zoo->getZonaArtica().size(); i++)
     {
-        if(zoo->getZonaArtica()[i]!=NULL){
-            cout<<i<<") "<<zoo->getZonaArtica()[i]->toString()<<endl;
+        if (zoo->getZonaArtica()[i] != NULL)
+        {
+            cout << i << ") " << zoo->getZonaArtica()[i]->toString() << endl;
         }
     }
     cout << "Animales del Zona Desertica" << endl;
     for (int i = 0; i < zoo->getZonaDesertica().size(); i++)
     {
-        if(zoo->getZonaDesertica()[i]!=NULL){
-            cout<<i<<") "<<zoo->getZonaDesertica()[i]->toString()<<endl;
+        if (zoo->getZonaDesertica()[i] != NULL)
+        {
+            cout << i << ") " << zoo->getZonaDesertica()[i]->toString() << endl;
         }
     }
     cout << "Animales de Jungla Tropical" << endl;
     for (int i = 0; i < zoo->getJunglaTropical().size(); i++)
     {
-        if(zoo->getJunglaTropical()[i]!=NULL){
-            cout<<i<<") "<<zoo->getJunglaTropical()[i]->toString()<<endl;
+        if (zoo->getJunglaTropical()[i] != NULL)
+        {
+            cout << i << ") " << zoo->getJunglaTropical()[i]->toString() << endl;
         }
     }
 
     cout << "Animales de Sabana " << endl;
     for (int i = 0; i < zoo->getSabana().size(); i++)
     {
-        if(zoo->getSabana()[i]!=NULL){
-            cout<<i<<") "<<zoo->getSabana()[i]->toString()<<endl;
+        if (zoo->getSabana()[i] != NULL)
+        {
+            cout << i << ") " << zoo->getSabana()[i]->toString() << endl;
         }
     }
-
 }
 
-Zoologico *TrasladarAnimales(vector<Animales *> listaEspera, Zoologico *zoo)
+Zoologico *Transferecia(string name, int tam, int personas, vector<Animales *> listaEspera, Zoologico *zoo)
 {
-    zoo = new Zoologico();
+    zoo = new Zoologico(name,tam,personas);
     for (int i = 0; i < listaEspera.size(); i++)
     {
         if (listaEspera[i] != NULL)
@@ -322,4 +327,8 @@ Zoologico *TrasladarAnimales(vector<Animales *> listaEspera, Zoologico *zoo)
     cout << "Animales Trasladados" << endl;
     usleep(1000000);
     return zoo;
+}
+
+void Ordenar(Zoologico* z){
+    
 }

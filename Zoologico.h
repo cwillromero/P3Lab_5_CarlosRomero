@@ -15,6 +15,9 @@ class Zoologico{
 
     //Atributos
     private:
+	string nombre;
+	int tamanio;
+	int capacidad;
         vector<Animales *> zonaArtica;
         vector<Animales *> zonaDesertica;
         vector<Animales *> junglaTropical;
@@ -25,7 +28,7 @@ class Zoologico{
     public:
         //prototipos de metodos
         //constructor
-        Zoologico();
+        Zoologico(string, int, int);
 
         //metodos accersores / mutadores
         vector<Animales *> getZonaArtica();

@@ -7,8 +7,11 @@
 using namespace std;
 
 //Constructor2
-Zoologico::Zoologico()
+Zoologico::Zoologico(string nombre, int tamanio, int capacidad)
 {
+    this->nombre=nombre;
+    this->tamanio=tamanio;
+    this->capacidad=capacidad;
     vector<Animales *> zonaArtica;
     vector<Animales *> zonaDesertica;
     vector<Animales *> junglaTropical;
