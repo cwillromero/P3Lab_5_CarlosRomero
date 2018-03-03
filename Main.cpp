@@ -336,6 +336,7 @@ Zoologico *Transferecia(string name, int tam, int personas, vector<Animales *> l
 
 void Ordenar(Zoologico *z)
 {
+    cout<<endl<<"--Ordenado---"<<endl;
     vector<Animales*> ZA=z->getZonaArtica();
     cout<<"Zona Artica"<<endl;
     for (int i = 0; i < ZA.size(); i++)
@@ -400,6 +401,28 @@ void Ordenar(Zoologico *z)
     }
     for(int i=0; i<JT.size(); i++){
         cout<<JT[i]->toString()<<endl;
+    }
+
+    vector<Animales*> S=z->getSabana();
+    cout<<"Sabana"<<endl;
+    for (int i = 0; i < S.size(); i++)
+    {
+        for (int j = i + 1; j < S.size(); j++)
+        {
+            Animales *temp = S[i];
+            Animales *temp2 = S[j];
+            int x = temp->getNombre().at(0);
+            int y = temp2->getNombre().at(0);
+            if (x > y)
+            {
+                S[j] = temp;
+                S[j-1] = temp2;
+                ;
+            }
+        }
+    }
+    for(int i=0; i<S.size(); i++){
+        cout<<S[i]->toString()<<endl;
     }
 
 
