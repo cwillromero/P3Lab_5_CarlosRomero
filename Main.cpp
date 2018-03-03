@@ -21,17 +21,17 @@ void Ordenar(Zoologico *);
 
 int main()
 {
-    cout<<"--------Laboratorio #5 - Carlos Romero----"<<endl;
+    cout << "--------Laboratorio #5 - Carlos Romero----" << endl;
     string name;
-    cout<<"Ingrese el Nombre del Zoologico"<<endl;
-    cin>>name;
+    cout << "Ingrese el Nombre del Zoologico" << endl;
+    cin >> name;
     int tamanio;
-    cout<<"Ingrese el Tamaño del Zoologico"<<endl;
-    cin>>tamanio;
+    cout << "Ingrese el Tamaño del Zoologico" << endl;
+    cin >> tamanio;
     vector<Animales *> listaEspera;
     int personas;
-    cout<<"Ingrese la Capacidad de Personas del Zoologico"<<endl;
-    cin>>personas;
+    cout << "Ingrese la Capacidad de Personas del Zoologico" << endl;
+    cin >> personas;
     int opcion;
     Zoologico *Zool;
     while (opcion != 5)
@@ -85,6 +85,11 @@ int main()
         case 4:
         {
             Listar(Zool);
+            /*for (int i = 0; i < listaEspera.size(); i++){
+                delete listaEspera[i];
+                listaEspera[i] = NULL;
+            }*/
+            Ordenar(Zool);
             break;
         }
         case 5:
@@ -100,7 +105,7 @@ int main()
 
 int menu()
 {
-    int r=6;
+    int r = 6;
     while (r > 5 || r <= 0)
     {
         cout << endl
@@ -301,7 +306,7 @@ void Listar(Zoologico *zoo)
 
 Zoologico *Transferecia(string name, int tam, int personas, vector<Animales *> listaEspera, Zoologico *zoo)
 {
-    zoo = new Zoologico(name,tam,personas);
+    zoo = new Zoologico(name, tam, personas);
     for (int i = 0; i < listaEspera.size(); i++)
     {
         if (listaEspera[i] != NULL)
@@ -329,6 +334,73 @@ Zoologico *Transferecia(string name, int tam, int personas, vector<Animales *> l
     return zoo;
 }
 
-void Ordenar(Zoologico* z){
-    
+void Ordenar(Zoologico *z)
+{
+    vector<Animales*> ZA=z->getZonaArtica();
+    cout<<"Zona Artica"<<endl;
+    for (int i = 0; i < ZA.size(); i++)
+    {
+        for (int j = i + 1; j < ZA.size(); j++)
+        {
+            Animales *temp = ZA[i];
+            Animales *temp2 = ZA[j];
+            int x = temp->getNombre().at(0);
+            int y = temp2->getNombre().at(0);
+            if (x > y)
+            {
+                ZA[j] = temp;
+                ZA[j-1] = temp2;
+                ;
+            }
+        }
+    }
+    for(int i=0; i<ZA.size(); i++){
+        cout<<ZA[i]->toString()<<endl;
+    }
+
+    vector<Animales*> ZD=z->getZonaDesertica();
+    cout<<"Zona Desertica"<<endl;
+    for (int i = 0; i < ZD.size(); i++)
+    {
+        for (int j = i + 1; j < ZD.size(); j++)
+        {
+            Animales *temp = ZD[i];
+            Animales *temp2 = ZD[j];
+            int x = temp->getNombre().at(0);
+            int y = temp2->getNombre().at(0);
+            if (x > y)
+            {
+                ZD[j] = temp;
+                ZD[j-1] = temp2;
+                ;
+            }
+        }
+    }
+    for(int i=0; i<ZD.size(); i++){
+        cout<<ZD[i]->toString()<<endl;
+    }
+
+    vector<Animales*> JT=z->getJunglaTropical();
+    cout<<"Jungla Tropical"<<endl;
+    for (int i = 0; i < JT.size(); i++)
+    {
+        for (int j = i + 1; j < JT.size(); j++)
+        {
+            Animales *temp = JT[i];
+            Animales *temp2 = JT[j];
+            int x = temp->getNombre().at(0);
+            int y = temp2->getNombre().at(0);
+            if (x > y)
+            {
+                JT[j] = temp;
+                JT[j-1] = temp2;
+                ;
+            }
+        }
+    }
+    for(int i=0; i<JT.size(); i++){
+        cout<<JT[i]->toString()<<endl;
+    }
+
+
 }
